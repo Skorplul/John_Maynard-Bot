@@ -1,4 +1,4 @@
-import { readFile, writeFile, readFileSync, writeFileSync } from 'node:fs';
+import { readFile, writeFile, readFileSync, writeFileSync, read } from 'node:fs';
 import fetch from "cross-fetch";
 import "dotenv/config";
 import express from "express";
@@ -30,6 +30,8 @@ app.post("/interactions", async function (req, res) {
   const { type, id, data } = req.body;
   const APPLICATION_ID = req.body.application_id;
   const INTERACTION_TOKEN = req.body.token;
+  const guildId = req.body.guild_id;
+  const userId = req.body.member.user.id;
 
   /**
    * Handle verification requests
@@ -56,51 +58,9 @@ app.post("/interactions", async function (req, res) {
       Webhook()
     }
 
-      if (name === "gamble") {
-          readFileSync("stats.json", (error, userStat) => {
-              if (error) {
-                  
-                  console.error(error);
-
-                  throw err;
-              }
-              console.log("NOT PARSED     " + stats)
-
-              const user = JSON.parse(suserStat);
-
-              console.log("PARSED     " + user)
-          });
-
-          //let number = stats;
-          const userStat = {
-             // UId: number,
-              id: req.body.member.user.id,
-              name: req.body.member.user.username,
-          }
-
-          const data = JSON.stringify(userStat);
-
-          // writing the JSON string content to a file
-          writeFile("stats.json", data, (error) => {
-              // throwing the error
-              // in case of a writing problem
-              if (error) {
-                  // logging the error
-                  return console.error(error);
-
-                  throw error;
-              }
-
-              return console.log("data written correctly");
-          });
-
-          res.send({
-              type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-              data: {
-                  content: `I saved ${userStat.name}`
-              }
-          })
-      }
+     if (name === "gamble") {
+         muteGamble();
+     }
 
     if (name === "ping") {
       let pingTarget = req.body.data.options[1].value;
@@ -193,7 +153,81 @@ app.post("/interactions", async function (req, res) {
       }
       repeat--;
     }
-  }
+   }
+
+
+    function muteGamble() {
+        const mute = getGambleInt(1, 2);
+        const muteAkt = getGambleInt(1, 10);
+        
+        console.log(mute, muteAkt)
+
+        if (mute === muteAkt) {
+            muteer()
+
+        } else { 
+            res.send({
+                type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+                data: {
+                    content: `Lucky you!`
+                }
+            })
+        }
+    }
+
+    async function muteer() {
+        // Construct the URL for the follow-up message endpoint
+        const muteUrl = `https://discord.com/api/guilds/${guildId}/members/${userId}`;
+
+
+        const currentTime = Date.now();
+        const timeoutExpiryTime = currentTime + (5 * 60 * 1000);
+        const timeoutExpiryISO = new Date(timeoutExpiryTime).toISOString();
+
+        const mutedTill = timeoutExpiryISO;
+        const muteReqData = {
+            communication_disabled_until: mutedTill,
+        };
+
+        try {
+            // Make an HTTP POST request to send the follow-up message
+            const response = await fetch(muteUrl, {
+                method: "PATCH",
+                headers: {
+                    Authorization: `Bot ${process.env.DISCORD_TOKEN}`,
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(muteReqData),
+            });
+
+            if (!response.ok) {
+                console.log(muteUrl);
+                throw new Error(
+                    "Error sending Webhook message: " + response.statusText
+                );
+            }
+
+            //console.log('Follow-up message sent successfully!');
+        } catch (error) {
+            return console.error(error);
+        };
+
+        res.send({
+            type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+            data: {
+                content: `You dead :3`
+            }
+        });
+    }
+
+
+
+    function getGambleInt(min, max) {
+        const minCeiled = Math.ceil(min);
+        const maxFloored = Math.floor(max);
+        return Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled);
+    }
+
 });
 app.listen(PORT, () => {
   //  console.log('Listening on port', PORT);
