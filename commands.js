@@ -91,6 +91,12 @@ const STATUS_COMMAND = {
     ],
 };
 
-const ALL_COMMANDS = [TEST_COMMAND, PING_COMMAND, GAMBLE_COMMAND, STATUS_COMMAND,];
+const GEDICHT_COMMAND = {
+    name: "gedicht",
+    description: ":shushing_face:",
+    type: 1,
+};
+
+const ALL_COMMANDS = [TEST_COMMAND, PING_COMMAND, GAMBLE_COMMAND, STATUS_COMMAND, GEDICHT_COMMAND];
 
 InstallGlobalCommands(process.env.APP_ID, ALL_COMMANDS);
