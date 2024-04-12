@@ -55,7 +55,7 @@ app.post("/interactions", async function (req, res) {
           content: "I try! " + getRandomEmoji(),
         },
       });
-      Webhook()
+      //Webhook()
     }
 
      if (name === "gamble") {
