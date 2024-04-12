@@ -59,7 +59,9 @@ app.post("/interactions", async function (req, res) {
     }
 
      if (name === "gamble") {
+
          muteGamble();
+
      }
 
     if (name === "ping") {
@@ -200,6 +202,12 @@ app.post("/interactions", async function (req, res) {
             });
 
             if (!response.ok) {
+                res.send({
+                    type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+                    data: {
+                        content: `Error: No permission`
+                    }
+                });
                 console.log(muteUrl);
                 throw new Error(
                     "Error sending request: " + response.statusText
