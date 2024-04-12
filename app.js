@@ -59,7 +59,9 @@ app.post("/interactions", async function (req, res) {
     }
 
      if (name === "gamble") {
+
          muteGamble();
+
      }
 
     if (name === "ping") {
@@ -157,8 +159,8 @@ app.post("/interactions", async function (req, res) {
 
 
     function muteGamble() {
-        const mute = getGambleInt(1, 2);
-        const muteAkt = getGambleInt(1, 10);
+        const mute = 1;
+        const muteAkt = getGambleInt(1, 6);
         
         console.log(mute, muteAkt)
 
@@ -182,9 +184,8 @@ app.post("/interactions", async function (req, res) {
 
         const currentTime = Date.now();
         const timeoutExpiryTime = currentTime + (5 * 60 * 1000);
-        const timeoutExpiryISO = new Date(timeoutExpiryTime).toISOString();
+        const mutedTill = new Date(timeoutExpiryTime).toISOString();
 
-        const mutedTill = timeoutExpiryISO;
         const muteReqData = {
             communication_disabled_until: mutedTill,
         };
@@ -201,9 +202,15 @@ app.post("/interactions", async function (req, res) {
             });
 
             if (!response.ok) {
+                res.send({
+                    type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+                    data: {
+                        content: `Error: No permission`
+                    }
+                });
                 console.log(muteUrl);
                 throw new Error(
-                    "Error sending Webhook message: " + response.statusText
+                    "Error sending request: " + response.statusText
                 );
             }
 
