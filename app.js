@@ -55,7 +55,7 @@ app.post("/interactions", async function (req, res) {
           content: "I try! " + getRandomEmoji(),
         },
       });
-      Webhook()
+      //Webhook()
     }
 
      if (name === "gamble") {
@@ -116,10 +116,76 @@ app.post("/interactions", async function (req, res) {
         }
       }
     }
+
+    if (req.body.data.name === "status") {
+        return res.send({
+            type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+            data: {
+                content: `Command is WIP rn, please give me some time. :)`,
+            },
+        });
+
+
+        console.log(name)
+        console.log(userId)
+        let botOwnerId = "504875989776596992";
+        if (userId === botOwnerId) {
+            let statusStat = req.body.data.options[0].value
+            console.log(userId)
+            console.log(statusStat)
+            if (statusStat === "1") {
+                //bot.user.setStatus('online'),
+                workDoneMsg();
+                console.log("do")
+            };
+            if (statusStat === "2") {
+                //bot.user.setStatus('idle'),
+                workDoneMsg();
+            };
+            if (statusStat === "3") {
+               // bot.user.setStatus('Do Not Disturb'),
+                workDoneMsg();
+            };
+            if (statusStat === "4") {
+                //bot.user.setStatus('invisible'),
+                workDoneMsg();
+            };
+             console.log("do not")
+        }
+        res.send({
+            type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+            data: {
+                content: `nope`,
+            },
+        });
+    };
+
+
+
+
+
+    /*
+    *
+    *
+    *  Above new command actions
+    * 
+    * 
+    */
+
   }
   function sleep(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
+
+    function workDoneMsg() {
+        res.send({
+            type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+            data: {
+                content: `Done`,
+            },
+        }); 
+    };
+
 
   async function Webhook() {
     let repeat = 1;

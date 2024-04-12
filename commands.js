@@ -57,6 +57,40 @@ const GAMBLE_COMMAND = {
     type: 1,
 };
 
-const ALL_COMMANDS = [TEST_COMMAND, PING_COMMAND, GAMBLE_COMMAND,];
+// Status command
+const STATUS_COMMAND = {
+    name: "status",
+    type: 1,
+    description: "Set bot status",
+    options: [
+        {
+            name: "status-choice",
+            description: "Which status should the bot take on?",
+            type: 3,
+            required: true,
+            choices: [
+                {
+                    name: "online",
+                    value: "1",
+                },
+                {
+                    name: "idle",
+                    value: "2",
+                },
+                {
+                    name: "Do Not Disturb",
+                    value: "3",
+                },
+                {
+                    name: "invisible",
+                    value: "4",
+                },
+            ],
+        },
+        
+    ],
+};
+
+const ALL_COMMANDS = [TEST_COMMAND, PING_COMMAND, GAMBLE_COMMAND, STATUS_COMMAND,];
 
 InstallGlobalCommands(process.env.APP_ID, ALL_COMMANDS);
