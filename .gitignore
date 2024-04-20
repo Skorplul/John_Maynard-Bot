@@ -3,7 +3,5 @@ node_modules
 .vs
 .bash_history
 Temp.js
-Start.bat
-Webhook.bat
-ngrok.exe
-BotStart.bat
+*.bat
+*.exe
