@@ -14,7 +14,7 @@ import {
   getRandomEmoji,
   DiscordRequest,
 } from "./utils.js";
-import { ballSay } from './daBall.js';
+import { ballAnswers } from './daBall.js';
 
 // Create an express app
 const app = express();
@@ -280,8 +280,7 @@ John Maynard.“`, // Use dynamic content
           
       if (req.body.data.name === "8-ball") {
           let ballAnswerInt = getRandInt(0, 6);
-          const answers = ["OK, you die... so no!", "Nope! :^)", "YES!", "sure", "I guess..", "Why not", "Fuck off",];
-          const answer = answers[ballAnswerInt];
+          const answer = ballAnswers[ballAnswerInt];
           return res.send({
               type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
               data: {
