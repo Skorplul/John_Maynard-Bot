@@ -97,6 +97,12 @@ const GEDICHT_COMMAND = {
     type: 1,
 };
 
-const ALL_COMMANDS = [TEST_COMMAND, PING_COMMAND, GAMBLE_COMMAND, STATUS_COMMAND, GEDICHT_COMMAND];
+const BALL_COMMAND = {
+    name: "8-ball",
+    description: "What will he say?!",
+    type: 1,
+};
+
+const ALL_COMMANDS = [TEST_COMMAND, PING_COMMAND, GAMBLE_COMMAND, STATUS_COMMAND, GEDICHT_COMMAND, BALL_COMMAND,];
 
 InstallGlobalCommands(process.env.APP_ID, ALL_COMMANDS);

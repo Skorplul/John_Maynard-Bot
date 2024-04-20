@@ -14,6 +14,7 @@ import {
   getRandomEmoji,
   DiscordRequest,
 } from "./utils.js";
+import { ballSay } from './daBall.js';
 
 // Create an express app
 const app = express();
@@ -277,8 +278,17 @@ John Maynard.“`, // Use dynamic content
           
       }
           
-
-
+      if (req.body.data.name === "8-ball") {
+          let ballAnswerInt = getRandInt(0, 6);
+          const answers = ["OK, you die... so no!", "Nope! :^)", "YES!", "sure", "I guess..", "Why not", "Fuck off",];
+          const answer = answers[ballAnswerInt];
+          return res.send({
+              type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+              data: {
+                  content: `${answer}`,
+              },
+          });
+      }
 
     /*
     *
@@ -342,7 +352,7 @@ John Maynard.“`, // Use dynamic content
 
     function muteGamble() {
         const mute = 1;
-        const muteAkt = getGambleInt(1, 6);
+        const muteAkt = getRandInt(1, 6);
         
         console.log(mute, muteAkt)
 
@@ -411,7 +421,7 @@ John Maynard.“`, // Use dynamic content
 
 
 
-    function getGambleInt(min, max) {
+    function getRandInt(min, max) {
         const minCeiled = Math.ceil(min);
         const maxFloored = Math.floor(max);
         return Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled);
