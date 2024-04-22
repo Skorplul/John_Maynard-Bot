@@ -47,3 +47,37 @@ aber durchs Sprachrohr fragt er an:
 „Noch da, John Maynard?“
 „Ja, Herr. Ich bin.“
 `
+
+
+export const johnGedZwei = `„Auf den Strand! In die Brandung!“
+„Ich halte drauf hin.“
+Und das Schiffsvolk jubelt: „Halt aus! Hallo!“
+Und noch zehn Minuten bis Buffalo. - -
+
+„Noch da, John Maynard?“ Und Antwort schallt's
+mit ersterbender Stimme: „Ja, Herr, ich halt's!“
+Und in die Brandung, was Klippe, was Stein,
+jagt er die „Schwalbe“ mitten hinein.
+Soll Rettung kommen, so kommt sie nur so.
+Rettung: der Strand von Buffalo!
+
+Das Schiff geborsten. Das Feuer verschwelt.
+Gerettet alle. Nur einer fehlt!
+Alle Glocken gehn; ihre Töne schwell'n
+himmelan aus Kirchen und Kapell'n,
+
+ein Klingen und Läuten, sonst schweigt die Stadt,
+ein Dienst nur, den sie heute hat:
+Zehntausend folgen oder mehr,
+und kein Aug' im Zuge, das tränenleer.
+
+Sie lassen den Sarg in Blumen hinab,
+mit Blumen schließen sie das Grab,
+und mit goldner Schrift in den Marmorstein
+schreibt die Stadt ihren Dankspruch ein:
+
+„Hier ruht John Maynard! In Qualm und Brand
+hielt er das Steuer fest in der Hand,
+er hat uns gerettet, er trägt die Kron,
+er starb für uns, unsre Liebe sein Lohn.
+John Maynard.“`
