@@ -16,6 +16,7 @@ import {
 } from "./utils.js";
 import './daBall.js';
 import { johnGedErst, johnGedZwei, ballAnswers } from './daBall.js';
+import { untimeout } from './commands/untimeout.js';
 
 // Create an express app
 const app = express();
@@ -44,7 +45,7 @@ app.post("/interactions", async function (req, res) {
    * See https://discord.com/developers/docs/interactions/application-commands#slash-commands
    */
   if (type === InteractionType.APPLICATION_COMMAND) {
-    // console.log(req.body)
+      // console.log(req.body)
       const { name } = data;
       const APPLICATION_ID = req.body.application_id;
       const INTERACTION_TOKEN = req.body.token;
@@ -59,7 +60,7 @@ Time: ${Time.toString()}`);
     if (name === "untimeout") {
         let unmuteTarget = req.body.data.options[0].value;
         const muteUrl = `https://discord.com/api/guilds/${guildId}/members/${unmuteTarget}`;
-        
+
         const mutedTill = null;
 
         const muteReqData = {
