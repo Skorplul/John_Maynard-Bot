@@ -49,6 +49,14 @@ const TEST_COMMAND = {
   name: "test",
   description: "Basic command",
   type: 1,
+    options: [
+        {
+            name: "user",
+            description: "Who do you want to ping?",
+            type: 6,
+            required: true,
+        },
+  ]
 };
 
 const GAMBLE_COMMAND = {
