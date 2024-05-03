@@ -45,8 +45,8 @@ const PING_COMMAND = {
 };
 
 // Simple test command
-const TEST_COMMAND = {
-  name: "test",
+const UNTIMEOUT_COMMAND = {
+  name: "untimeout",
   description: "Basic command",
   type: 1,
     options: [
@@ -111,6 +111,6 @@ const BALL_COMMAND = {
     type: 1,
 };
 
-const ALL_COMMANDS = [TEST_COMMAND, PING_COMMAND, GAMBLE_COMMAND, STATUS_COMMAND, GEDICHT_COMMAND, BALL_COMMAND,];
+const ALL_COMMANDS = [UNTIMEOUT_COMMAND, PING_COMMAND, GAMBLE_COMMAND, STATUS_COMMAND, GEDICHT_COMMAND, BALL_COMMAND,];
 
 InstallGlobalCommands(process.env.APP_ID, ALL_COMMANDS);

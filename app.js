@@ -51,7 +51,7 @@ app.post("/interactions", async function (req, res) {
       const guildId = req.body.guild_id;
       const userId = req.body.member.user.id;
 
-    if (name === "test") {
+    if (name === "untimeout") {
         let unmuteTarget = req.body.data.options[0].value;
         const muteUrl = `https://discord.com/api/guilds/${guildId}/members/${unmuteTarget}`;
         
