@@ -44,12 +44,17 @@ app.post("/interactions", async function (req, res) {
    * See https://discord.com/developers/docs/interactions/application-commands#slash-commands
    */
   if (type === InteractionType.APPLICATION_COMMAND) {
-    console.log(req.body)
+    // console.log(req.body)
       const { name } = data;
       const APPLICATION_ID = req.body.application_id;
       const INTERACTION_TOKEN = req.body.token;
       const guildId = req.body.guild_id;
       const userId = req.body.member.user.id;
+      var Time = new Date(Date.now());
+      console.log(`User ID: ${userId}
+Server ID: ${guildId}
+Command: ${name}
+Time: ${Time.toString()}`);
 
     if (name === "untimeout") {
         let unmuteTarget = req.body.data.options[0].value;
@@ -200,7 +205,6 @@ app.post("/interactions", async function (req, res) {
     };
 
 
-        console.log(name)
       if (name === "gedicht") {
           
             res.send({
