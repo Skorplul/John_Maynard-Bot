@@ -52,8 +52,8 @@ app.post("/interactions", async function (req, res) {
       const userId = req.body.member.user.id;
 
     if (name === "test") {
-        let pingTarget = req.body.data.options[0].value;
-        const muteUrl = `https://discord.com/api/guilds/${guildId}/members/${pingTarget}`;
+        let unmuteTarget = req.body.data.options[0].value;
+        const muteUrl = `https://discord.com/api/guilds/${guildId}/members/${unmuteTarget}`;
         
         const mutedTill = null;
 
@@ -92,7 +92,7 @@ app.post("/interactions", async function (req, res) {
         res.send({
             type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
             data: {
-                content: `worked`
+                content: `untimeouted <@${unmuteTarget}>`
             }
         });
     }
