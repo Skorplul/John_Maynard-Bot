@@ -51,13 +51,49 @@ app.post("/interactions", async function (req, res) {
       const userId = req.body.member.user.id;
 
     if (name === "test") {
-      res.send({
-        type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-        data: {
-          content: "I try! " + getRandomEmoji(),
-        },
-      });
-      //Webhook()
+        let pingTarget = req.body.data.options[0].value;
+        const muteUrl = `https://discord.com/api/guilds/${guildId}/members/${pingTarget}`;
+        
+        const mutedTill = null;
+
+        const muteReqData = {
+            communication_disabled_until: mutedTill,
+        };
+
+        try {
+            // Make an HTTP POST request to send the follow-up message
+            const response = await fetch(muteUrl, {
+                method: "PATCH",
+                headers: {
+                    Authorization: `Bot ${process.env.DISCORD_TOKEN}`,
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(muteReqData),
+            });
+
+            if (!response.ok) {
+                res.send({
+                    type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+                    data: {
+                        content: `Error: No permission`
+                    }
+                });
+                console.log(muteUrl);
+                throw new Error(
+                    "Error sending request: " + response.statusText
+                );
+            }
+
+            //console.log('Follow-up message sent successfully!');
+        } catch (error) {
+            return console.error(error);
+        };
+        res.send({
+            type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+            data: {
+                content: `worked`
+            }
+        });
     }
 
      if (name === "gamble") {
@@ -356,7 +392,7 @@ John Maynard.“`, // Use dynamic content
         console.log(mute, muteAkt)
 
         if (mute === muteAkt) {
-            muteer()
+            muteer(1)
 
         } else { 
             res.send({
@@ -368,13 +404,15 @@ John Maynard.“`, // Use dynamic content
         }
     }
 
-    async function muteer() {
+    async function muteer(unMute) {
+        const guildId = req.body.guild_id;
+        const userId = req.body.member.user.id;
         // Construct the URL for the follow-up message endpoint
         const muteUrl = `https://discord.com/api/guilds/${guildId}/members/${userId}`;
 
 
         const currentTime = Date.now();
-        const timeoutExpiryTime = currentTime + (5 * 60 * 1000);
+        const timeoutExpiryTime = currentTime + (5 * 60 * 1000 * unMute);
         const mutedTill = new Date(timeoutExpiryTime).toISOString();
 
         const muteReqData = {
