@@ -14,7 +14,6 @@ import {
   getRandomEmoji,
   DiscordRequest,
 } from "./utils.js";
-import './daBall.js';
 import { johnGedErst, johnGedZwei, ballAnswers } from './txtData.js';
 import { untimeout } from './commands/untimeout.js';
 
