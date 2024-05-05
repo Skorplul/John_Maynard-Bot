@@ -161,7 +161,7 @@ Time: ${Time.toString()}`);
       }
     }
 
-    if (req.body.data.name === "status") {
+    if (name === "status") {
         return res.send({
             type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
             data: {
@@ -172,7 +172,7 @@ Time: ${Time.toString()}`);
 
         console.log(name)
         console.log(userId)
-        let botOwnerId = "504875989776596992";
+        let botOwnerId = "504875989776596992"; // userID = @Skorp 1.0
         if (userId === botOwnerId) {
             let statusStat = req.body.data.options[0].value
             console.log(userId)
