@@ -1,4 +1,4 @@
-Hello~ :3
+## this stuff here is trash pls don't use or read it!! thx
 
 I made this DC Bot just for fun, it is primarily exclusive for my friend and me.
 The code ain't the best cuse I also learned JS from the ground up through this,
